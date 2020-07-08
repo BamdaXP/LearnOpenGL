@@ -23,7 +23,14 @@ Transform::Transform(vec3 pos, vec3 rot)
 
 mat4 Transform::GetTransformMatrix()
 {
-	return mat4();
+	mat4 trans = mat4(1.0f);
+	trans = scale(trans, Scale);
+	trans = rotate(trans, radians(Rotation.x), vec3(1.0f, 0.0f, 0.0f));
+	trans = rotate(trans, radians(Rotation.y), vec3(0.0f, 1.0f, 0.0f));
+	trans = rotate(trans, radians(Rotation.z), vec3(0.0f, 0.0f, 1.0f));
+	trans = translate(trans, Position);
+	
+	return trans;
 }
 
 void Transform::Translate(vec3 delta)
@@ -33,24 +40,7 @@ void Transform::Translate(vec3 delta)
 
 void Transform::Rotate(vec3 axis, float rad)
 {
-}
-
-Quaterion::Quaterion()
-{
-	value = vec4();
-}
-
-Quaterion::Quaterion(vec4 val)
-{
-	value = val;
-}
-
-Quaterion::Quaterion(vec3 Euler)
-{
 	
 }
 
-vec3 Quaterion::ToEuler()
-{
-	return vec3();
-}
+

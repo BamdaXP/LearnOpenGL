@@ -13,9 +13,9 @@ private:
 	int b_Channels;
 public:
 	Texture(typename std::string path);
-	void UseTexture(GLenum textureOrder);
 	int GetTextureHandle();
 	int GetWidth();
 	int GetHeight();
+	~Texture();
 };
 

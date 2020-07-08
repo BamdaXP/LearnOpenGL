@@ -1,5 +1,5 @@
 #include "Shader.h"
-
+#include <GLM/gtc/type_ptr.hpp>
 
 /*
 const char* Shader::VertexShaderCode =
@@ -145,4 +145,14 @@ void Shader::SetInt(const string& name, int value)
 void Shader::SetFloat(const string& name, float value)
 {
 	glUniform1f(glGetUniformLocation(b_ShaderProgramHandle, name.c_str()), value);
+}
+
+void Shader::SetMat4(const string& name, const mat4& value)
+{
+	unsigned int matHandle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
+	glUniformMatrix4fv(matHandle, 1, GL_FALSE, value_ptr(value));
+}
+
+Shader::~Shader() {
+	glDeleteProgram(b_ShaderProgramHandle);
 }

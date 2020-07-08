@@ -18,12 +18,3 @@ public:
 	void Rotate(vec3 axis,float rad);
 };
 
-struct Quaterion {
-	vec4 value;
-
-	Quaterion();
-	Quaterion(vec4 val);
-	Quaterion(vec3 Euler);
-	vec3 ToEuler();
-
-};
