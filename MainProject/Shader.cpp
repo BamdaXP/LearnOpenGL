@@ -147,10 +147,16 @@ void Shader::SetFloat(const string& name, float value)
 	glUniform1f(glGetUniformLocation(b_ShaderProgramHandle, name.c_str()), value);
 }
 
+void Shader::SetVec3(const string& name, vec3& value)
+{
+	unsigned int vec3Handle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
+	glUniform3fv(vec3Handle, 1, value_ptr(value));
+}
+
 void Shader::SetMat4(const string& name, const mat4& value)
 {
-	unsigned int matHandle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
-	glUniformMatrix4fv(matHandle, 1, GL_FALSE, value_ptr(value));
+	unsigned int mat4Handle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
+	glUniformMatrix4fv(mat4Handle, 1, GL_FALSE, value_ptr(value));
 }
 
 Shader::~Shader() {

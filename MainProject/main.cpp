@@ -8,8 +8,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Shader.h"
 #include "Mesh.h"
+#include "MeshPrototypes.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Light.h"
 #include "Time.h"
 
 #define WINDOW_WIDTH 1024
@@ -69,50 +71,20 @@ int main() {
 
 	Shader shader = Shader("./Shaders/default_vertex_shader.glsl",
 		"./Shaders/default_fragment_shader.glsl");
+	Shader lightshader = Shader("./Shaders/default_vertex_shader.glsl",
+		"./Shaders/light_fragment_shader.glsl");
+
 	Texture texture = Texture("./Textures/chibi.png");
-	Mesh mesh = Mesh();
+	Mesh mesh = CubeMesh(5,vec3(1,0.5,0.5));
+	Mesh lightCube = CubeMesh(1, vec3(1, 1, 1));
+	lightCube.Transform.Position = vec3(5,8,5);
+	Light light = Light();
+	light.Transform = lightCube.Transform;
 
-	mesh.Vertices.push_back(Vertex(
-		vec3(0.0f, 0.0f, 0.0f),
-		vec3(1.0f),
-		vec3(),
-		vec2(0.0f, 0.0f)));
-	mesh.Vertices.push_back(Vertex(
-		vec3(0.5f, 0.0f, 0.0f),
-		vec3(1.0f),
-		vec3(),
-		vec2(1.0f, 0.0f)));;
-	mesh.Vertices.push_back(Vertex(
-		vec3(0.0f, 1.0f, 0.0f),
-		vec3(1.0f),
-		vec3(),
-		vec2(0.0f, 1.0f)));
-	mesh.Vertices.push_back(Vertex(
-		vec3(0.0f, 0.0f, 0.5f),
-		vec3(1.0f),
-		vec3(),
-		vec2(1.0f, 1.0f)));
-	mesh.Indices.push_back(0);
-	mesh.Indices.push_back(1);
-	mesh.Indices.push_back(2);
-
-	mesh.Indices.push_back(0);
-	mesh.Indices.push_back(3);
-	mesh.Indices.push_back(2);
-
-	mesh.Indices.push_back(0);
-	mesh.Indices.push_back(1);
-	mesh.Indices.push_back(3);
-
-	mesh.Indices.push_back(1);
-	mesh.Indices.push_back(3);
-	mesh.Indices.push_back(2);
-
-	mesh.Textures.push_back(texture);
 	//Main process
 	while (!glfwWindowShouldClose(window)) {
 		//Clear the buffer
-		glClearColor(0.3f, 0.3f, 0.8f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -120,6 +92,9 @@ int main() {
 		ProcessInput(window);
 
 		/*Do rendering here*/
+		lightCube.Draw(shader);
+
+		light.UseLight(shader);
 		mesh.Draw(shader);
 		mesh.Transform.Rotation.y += 0.5f;
 
@@ -130,8 +105,9 @@ int main() {
 		//Triger pending events
 		glfwPollEvents();
 
-		cout << Time::FramesPerSecond() << endl;
+		//cout << Time::FramesPerSecond() << endl;
 		Time::Update();
+		glFlush();
 	}
 
 	//Shut down glfw

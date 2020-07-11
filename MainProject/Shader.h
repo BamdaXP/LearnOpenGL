@@ -23,33 +23,9 @@ public:
 	void SetBool(const string& name, bool value);
 	void SetInt(const string& name, int value);
 	void SetFloat(const string& name, float value);
+	void SetVec3(const string& name, vec3& value);
 	void SetMat4(const string& name, const mat4& value);
 	~Shader();
 };
 
-
-/*
-class Shader
-{
-private:
-	char* b_Code;
-	unsigned int b_Type;
-	unsigned int b_ShaderHandle;
-	int b_Success;
-	char* b_Log;
-	
-
-public:
-	static const char* VertexShaderCode;
-	static const char* FragmentShaderCode;
-
-	Shader(char* code, typename GLenum type);
-	unsigned int GetShaderHandle();
-	int IsSuccess();
-	char* GetLog();
-
-	~Shader();
-
-};
-*/
 

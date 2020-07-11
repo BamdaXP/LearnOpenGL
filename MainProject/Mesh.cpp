@@ -54,7 +54,7 @@ void Mesh::Draw(Shader& shader,GLenum drawType)
     shader.SetMat4("transform", Transform.GetTransformMatrix());
     shader.SetMat4("view", Camera::MainCamera->GetViewMatrix());
     shader.SetMat4("projection", Camera::MainCamera->GetProjectionMatrix());
-    
+    shader.SetVec3("viewPos", Camera::MainCamera->Transform.Position);
 
     for (unsigned int i = 0; i < Textures.size(); i++)
     {
