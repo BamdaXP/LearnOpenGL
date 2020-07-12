@@ -7,3 +7,4 @@ Practice
 * Blinn-Phong lighting
 
 ![](./imgs/1.png)
+![](./imgs/2.png)
