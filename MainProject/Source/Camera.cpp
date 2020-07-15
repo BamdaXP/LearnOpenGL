@@ -1,6 +1,4 @@
 #include "Camera.h"
-
-
 Camera* Camera::MainCamera = nullptr;
 int Camera::ScreenWidth = 0;
 int Camera::ScreenHeight = 0;
