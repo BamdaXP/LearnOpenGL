@@ -1,9 +1,6 @@
 #pragma once
-#include <string>
-#include <GLAD/glad.h>
-#include <GLFW/glfw3.h>
-using namespace std;
 
+#include <string>
 class Texture
 {
 private:
@@ -12,10 +9,10 @@ private:
 	int b_Height;
 	int b_Channels;
 public:
-	Texture(typename std::string path);
-	int GetTextureHandle();
-	int GetWidth();
-	int GetHeight();
+	Texture(const std::string& path);
+	int GetTextureHandle() const;
+	int GetWidth() const;
+	int GetHeight() const;
 	~Texture();
 };
 

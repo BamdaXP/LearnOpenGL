@@ -1,4 +1,5 @@
 #include "Camera.h"
+
 Camera* Camera::MainCamera = nullptr;
 int Camera::ScreenWidth = 0;
 int Camera::ScreenHeight = 0;
@@ -10,23 +11,23 @@ Camera::Camera()
 	MainCamera = this;
 }
 
-mat4 Camera::GetViewMatrix()
+glm::mat4 Camera::GetViewMatrix() const
 {
-	return lookAt(Transform.Position,
+	return glm::lookAt(Transform.Position,
 		Transform.Position + GetTowardsVector(),
-		vec3(0.0f,1.0f,0.0f));
+		glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
-mat4 Camera::GetProjectionMatrix()
+glm::mat4 Camera::GetProjectionMatrix() const
 {
-	return perspective(radians(fovy),(float)ScreenWidth/ScreenHeight , NearPlane, FarPlane);
+	return glm::perspective(glm::radians(fovy), (float)ScreenWidth / ScreenHeight, NearPlane, FarPlane);
 }
 
-vec3 Camera::GetTowardsVector()
+glm::vec3 Camera::GetTowardsVector() const
 {
-	vec3 toward;
-	toward.x = cos(radians(Transform.Rotation.y) * cos(radians(Transform.Rotation.x)));
-	toward.y = sin(radians(Transform.Rotation.x));
-	toward.z = sin(radians(Transform.Rotation.y) * cos(radians(Transform.Rotation.x)));
+	glm::vec3 toward;
+	toward.x = cos(glm::radians(Transform.Rotation.y) * cos(glm::radians(Transform.Rotation.x)));
+	toward.y = sin(glm::radians(Transform.Rotation.x));
+	toward.z = sin(glm::radians(Transform.Rotation.y) * cos(glm::radians(Transform.Rotation.x)));
 	return toward;
 }

@@ -12,7 +12,7 @@ double Time::DeltaTime()
 double Time::FramesPerSecond()
 {
 	double delta = DeltaTime();
-	return delta == 0?0:1.0/delta;
+	return delta == 0 ? 0 : 1.0 / delta;
 }
 
 void Time::Update()

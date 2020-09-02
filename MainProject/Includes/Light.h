@@ -5,10 +5,10 @@ class Light
 public:
 
 	Transform Transform;
-	vec3 Color;
+	glm::vec3 Color;
 	float Intensity;
 
 	Light();
-	void UseLight(class Shader& shader);
+	void UseLight(const class Shader& shader) const;
 };
 

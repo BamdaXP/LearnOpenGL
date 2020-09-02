@@ -2,19 +2,18 @@
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/gtc/type_ptr.hpp>
-using namespace glm;
 struct Transform
 {
 public:
-	vec3 Position;
-	vec3 Rotation;
-	vec3 Scale;
+	glm::vec3 Position;
+	glm::vec3 Rotation;
+	glm::vec3 Scale;
 
 	Transform();
-	Transform(vec3 pos);
-	Transform(vec3 pos, vec3 rot);
-	mat4 GetTransformMatrix();
-	void Translate(vec3 delta);
-	void Rotate(vec3 axis,float rad);
+	Transform(const glm::vec3& pos);
+	Transform(const glm::vec3& pos, const glm::vec3& rot);
+	glm::mat4 GetTransformMatrix() const;
+	void Translate(const glm::vec3& delta);
+	void Rotate(const glm::vec3& axis,float rad);
 };
 

@@ -26,7 +26,6 @@ void ProcessInput(GLFWwindow* window);
 //Init Objects
 Camera camera = Camera();
 
-
 int main() {
 	//GLFW initialization
 	glfwInit();
@@ -37,14 +36,12 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//Mac OS options
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	
-
 
 	//Create the window and get the handle
 	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "MyGame", NULL, NULL);
 	//Handle the exception
 	if (window == NULL) {
-		std::cout << "Failed to create the GLFW window!"<<std::endl;
+		std::cout << "Failed to create the GLFW window!" << std::endl;
 		glfwTerminate();
 		return -1;//Shut the process
 	}
@@ -52,9 +49,9 @@ int main() {
 	//Make the current context
 	glfwMakeContextCurrent(window);
 
-	//Initiliaze GLAD 
+	//Initiliaze GLAD
 	if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == NULL) {
-		std::cout << "Failed to initialize GLAD!"<<std::endl;
+		std::cout << "Failed to initialize GLAD!" << std::endl;
 		glfwTerminate();
 		return -1;//Shut the process
 	}
@@ -75,9 +72,9 @@ int main() {
 		"./Shaders/light_fragment_shader.glsl");
 
 	Texture texture = Texture("./Textures/chibi.png");
-	Mesh mesh = CubeMesh(5,vec3(1,0.5,0.5));
+	Mesh mesh = CubeMesh(5, vec3(1, 0.5, 0.5));
 	Mesh lightCube = CubeMesh(1, vec3(1, 1, 1));
-	lightCube.Transform.Position = vec3(5,8,5);
+	lightCube.Transform.Position = vec3(5, 8, 5);
 	Light light = Light();
 	light.Transform = lightCube.Transform;
 
@@ -86,7 +83,6 @@ int main() {
 		//Clear the buffer
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 		//Update key input
 		ProcessInput(window);
@@ -115,8 +111,7 @@ int main() {
 	return 0;
 }
 
-
-void ResizeCallback(GLFWwindow* window,int width,int height) {
+void ResizeCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 	Camera::ScreenWidth = width;
 	Camera::ScreenHeight = height;
@@ -150,7 +145,6 @@ void MouseCallback(GLFWwindow* window, double xpos, double ypos)
 		camera.Transform.Rotation.x = 89.0f;
 	if (camera.Transform.Rotation.x < -89.0f)
 		camera.Transform.Rotation.x = -89.0f;
-
 }
 
 void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
@@ -164,15 +158,15 @@ void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 
 void ProcessInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window,true);
+		glfwSetWindowShouldClose(window, true);
 
 	float cameraSpeed = 2.5 * Time::DeltaTime();
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		 camera.Transform.Position += cameraSpeed * camera.GetTowardsVector();
+		camera.Transform.Position += cameraSpeed * camera.GetTowardsVector();
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		camera.Transform.Position -= cameraSpeed * camera.GetTowardsVector();
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.Transform.Position -= glm::normalize(glm::cross(camera.GetTowardsVector(), vec3(0.0f,1.0f,0.0f))) * cameraSpeed;
+		camera.Transform.Position -= glm::normalize(glm::cross(camera.GetTowardsVector(), vec3(0.0f, 1.0f, 0.0f))) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.Transform.Position += glm::normalize(glm::cross(camera.GetTowardsVector(), vec3(0.0f, 1.0f, 0.0f))) * cameraSpeed;
 }

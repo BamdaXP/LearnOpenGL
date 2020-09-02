@@ -93,7 +93,6 @@ Shader::Shader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath)
 		cout << "Vertex shader compile failed!\n" << infoLog << endl;
 	}
 
-
 	//Fragment shader compile
 	glCompileShader(fShaderHandle);
 	//Logging
@@ -120,40 +119,39 @@ Shader::Shader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath)
 	glDeleteShader(fShaderHandle);
 }
 
-void Shader::UseShader()
+void Shader::UseShader() const
 {
 	glUseProgram(b_ShaderProgramHandle);
 }
 
-unsigned int Shader::GetShaderProgramHandle()
+unsigned int Shader::GetShaderProgramHandle() const 
 {
 	return b_ShaderProgramHandle;
 }
 
-
 //Shader parameter utilities
-void Shader::SetBool(const string& name, bool value)
+void Shader::SetBool(const string& name, bool value) const
 {
-	glUniform1i(glGetUniformLocation(b_ShaderProgramHandle,name.c_str()), (int)value);
+	glUniform1i(glGetUniformLocation(b_ShaderProgramHandle, name.c_str()), (int)value);
 }
 
-void Shader::SetInt(const string& name, int value)
+void Shader::SetInt(const string& name, int value) const
 {
 	glUniform1i(glGetUniformLocation(b_ShaderProgramHandle, name.c_str()), value);
 }
 
-void Shader::SetFloat(const string& name, float value)
+void Shader::SetFloat(const string& name, float value) const
 {
 	glUniform1f(glGetUniformLocation(b_ShaderProgramHandle, name.c_str()), value);
 }
 
-void Shader::SetVec3(const string& name, vec3& value)
+void Shader::SetVec3(const string& name, const vec3& value) const
 {
 	unsigned int vec3Handle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
 	glUniform3fv(vec3Handle, 1, value_ptr(value));
 }
 
-void Shader::SetMat4(const string& name, const mat4& value)
+void Shader::SetMat4(const string& name, const mat4& value) const
 {
 	unsigned int mat4Handle = glGetUniformLocation(b_ShaderProgramHandle, name.c_str());
 	glUniformMatrix4fv(mat4Handle, 1, GL_FALSE, value_ptr(value));

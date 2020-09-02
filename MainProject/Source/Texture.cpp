@@ -1,14 +1,17 @@
+#include <GLAD/glad.h>
+#include <GLFW/glfw3.h>
 #include "Texture.h"
 #include "Shader.h"
 #include <iostream>
+#include <string>
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 using namespace std;
-Texture::Texture(string path)
+Texture::Texture(const string& path)
 {
 	//Gen texture buffer in GPU and bind it
 	glGenTextures(1, &b_TextureHandle);
-	glBindTexture(GL_TEXTURE_2D,b_TextureHandle);
+	glBindTexture(GL_TEXTURE_2D, b_TextureHandle);
 
 	//Texture parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -43,23 +46,21 @@ Texture::Texture(string path)
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-
 	//Free loaded data
 	stbi_image_free(data);
 }
 
-
-int Texture::GetTextureHandle()
+int Texture::GetTextureHandle() const
 {
 	return b_TextureHandle;
 }
 
-int Texture::GetWidth()
+int Texture::GetWidth() const
 {
 	return b_Width;
 }
 
-int Texture::GetHeight()
+int Texture::GetHeight() const
 {
 	return b_Height;
 }

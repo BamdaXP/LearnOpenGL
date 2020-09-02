@@ -1,11 +1,6 @@
 #pragma once
-#include <GLAD/glad.h>
-#include <GLFW/glfw3.h>
-#include "Vertex.h"
-#include "Texture.h"
 #include <vector>
 #include "Transform.h"
-using namespace std;
 class Mesh
 {
 public:
@@ -17,14 +12,14 @@ public:
 	Transform Transform;
 
 	//Mesh properties
-	vector<Vertex> Vertices;
-	vector<unsigned int> Indices;
-	vector<Texture> Textures;
+	std::vector<class Vertex> Vertices;
+	std::vector<unsigned int> Indices;
+	std::vector<class Texture> Textures;
 	
 	MeshTopology Topology = Mesh::Triangles;
 
 	Mesh();
-	void Draw(class Shader& shader, GLenum drawType = GL_STATIC_DRAW);
+	void Draw(const class Shader& shader);
 	~Mesh();
 private:
 	bool b_IsSetup;
