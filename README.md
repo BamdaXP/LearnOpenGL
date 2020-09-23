@@ -4,7 +4,7 @@ Practice
 
 * Cube mesh
 * Texture
-* Blinn-Phong lighting
+* Phong lighting model
 
 ![](./imgs/1.png)
 ![](./imgs/2.png)
